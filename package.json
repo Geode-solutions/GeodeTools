@@ -1,7 +1,16 @@
 {
   "name": "@geode/geode-tools",
+  "description": "Tools and Component to extend Geode",
+  "author": "Geode-solutions",
   "version": "0.0.0-semantically-released",
   "homepage": "https://github.com/Geode-solutions/GeodeTools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Geode-solutions/GeodeTools.git"
+  },
+  "bugs": {
+      "url": "https://github.com/Geode-solutions/GeodeTools/issues"
+  },
   "license": "MIT",
   "main": "dist/geode-tools.umd.js",
   "unpkg": "dist/geode-tools.umd.min.js",
@@ -34,5 +43,8 @@
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11",
     "vuetify": "^2.2.27"
+  },
+  "publishConfig": {
+      "access": "public"
   }
 }
