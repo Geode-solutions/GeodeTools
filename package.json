@@ -1,0 +1,38 @@
+{
+  "name": "@geode/geode-tools",
+  "version": "0.0.0-semantically-released",
+  "homepage": "https://github.com/Geode-solutions/GeodeTools",
+  "license": "MIT",
+  "main": "dist/geode-tools.umd.js",
+  "unpkg": "dist/geode-tools.umd.min.js",
+  "files": [
+    "dist/geode-tools.umd.js",
+    "dist/geode-tools.umd.min.js",
+    "src/*",
+    "server/*"
+  ],
+  "scripts": {
+    "build:vtk": "cmake-js compile",
+    "build:vue": "vue-cli-service build --target lib --no-clean ./src/main.js",
+    "lint": "vue-cli-service lint"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.3.1",
+    "@vue/cli-plugin-eslint": "^4.3.1",
+    "@vue/cli-service": "^4.3.1",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "cmake-js": "^6.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-loader": "^0.6.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11",
+    "vue-cli-plugin-vuetify": "^2.0.5",
+    "vue-svg-loader": "^0.16.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify": "^2.2.27"
+  }
+}
