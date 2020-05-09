@@ -18,7 +18,8 @@
     "dist/geode-tools.umd.js",
     "dist/geode-tools.umd.min.js",
     "src/*",
-    "server/*"
+    "server/*",
+    "CMakeLists.txt"
   ],
   "scripts": {
     "build:vtk": "cmake-js compile",
