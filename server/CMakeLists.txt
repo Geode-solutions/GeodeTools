@@ -36,9 +36,8 @@ if(PYTHONLIBS_FOUND)
 endif()
 ExternalProject_Add(vtk
     PREFIX ${VTK_PATH}
-    GIT_REPOSITORY https://github.com/Kitware/VTK
-    GIT_TAG 1b16528aea2605a33715187889f30594d02e3ea7
-    GIT_PROGRESS ON
+    URL https://www.vtk.org/files/release/9.0/VTK-9.0.0.tar.gz
+    URL_MD5 fa61cd36491d89a17edab18522bdda49
     CMAKE_GENERATOR ${CMAKE_GENERATOR}
     CMAKE_GENERATOR_PLATFORM ${CMAKE_GENERATOR_PLATFORM}
     CMAKE_ARGS

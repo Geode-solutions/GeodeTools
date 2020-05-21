@@ -9,7 +9,7 @@
     "url": "https://github.com/Geode-solutions/GeodeTools.git"
   },
   "bugs": {
-      "url": "https://github.com/Geode-solutions/GeodeTools/issues"
+    "url": "https://github.com/Geode-solutions/GeodeTools/issues"
   },
   "license": "MIT",
   "main": "dist/geode-tools.umd.js",
@@ -22,11 +22,12 @@
     "CMakeLists.txt"
   ],
   "scripts": {
-    "build:vtk": "cmake-js compile",
+    "build:vtk": "cmake-js compile -d server -O build && node package",
     "build:vue": "vue-cli-service build --target lib --no-clean ./src/main.js",
     "lint": "vue-cli-service lint"
   },
   "devDependencies": {
+    "@nodelib/fs.walk": "^1.2.4",
     "@vue/cli-plugin-babel": "^4.3.1",
     "@vue/cli-plugin-eslint": "^4.3.1",
     "@vue/cli-service": "^4.3.1",
@@ -46,6 +47,6 @@
     "vuetify": "^2.2.27"
   },
   "publishConfig": {
-      "access": "public"
+    "access": "public"
   }
 }
