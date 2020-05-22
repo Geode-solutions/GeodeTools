@@ -22,12 +22,11 @@
     "CMakeLists.txt"
   ],
   "scripts": {
-    "build:vtk": "cmake-js compile -d server -O build && node package",
+    "build:vtk": "cmake-js compile -d server -O build",
     "build:vue": "vue-cli-service build --target lib --no-clean ./src/main.js",
     "lint": "vue-cli-service lint"
   },
   "devDependencies": {
-    "@nodelib/fs.walk": "^1.2.4",
     "@vue/cli-plugin-babel": "^4.3.1",
     "@vue/cli-plugin-eslint": "^4.3.1",
     "@vue/cli-service": "^4.3.1",
