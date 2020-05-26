@@ -27,8 +27,16 @@ project(GeodeTools CXX)
 set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 if(PYTHON_VERSION MATCHES "^3")
     set(VTK_PYTHON_VERSION "3")
+    if(DEFINED ENV{Python3_ROOT_DIR})
+        message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
+        set(EXTRA_VTK_OPTIONS "-DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}")
+    endif()
 else()
     set(VTK_PYTHON_VERSION "2")
+    if(DEFINED ENV{Python3_ROOT_DIR})
+        message(STATUS "Using Python_ROOT_DIR = $ENV{Python2_ROOT_DIR}")
+        set(EXTRA_VTK_OPTIONS "-DPython2_ROOT_DIR:PATH=$ENV{Python2_ROOT_DIR}")
+    endif()
 endif()
 
 include(ExternalProject)
@@ -55,4 +63,5 @@ ExternalProject_Add(vtk
         -DVTK_BUILD_TESTING:BOOL=OFF
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
+        ${EXTRA_VTK_OPTIONS}
 )
