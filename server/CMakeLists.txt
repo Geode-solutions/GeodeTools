@@ -24,16 +24,18 @@ cmake_minimum_required(VERSION 3.11)
 # Project options
 project(GeodeTools CXX)
 
+set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
+if(PYTHON_VERSION MATCHES "^3")
+    set(VTK_PYTHON_VERSION "3")
+else()
+    set(VTK_PYTHON_VERSION "2")
+endif()
+
 include(ExternalProject)
 
 set(VTK_PATH ${PROJECT_BINARY_DIR}/vtk)
 set(VTK_INSTALL_PREFIX ${VTK_PATH}/install)
 string(REPLACE "/MDd" "/MD" NEW_FLAGS ${CMAKE_CXX_FLAGS_DEBUG})
-set(Python_version 2)
-find_package(PythonLibs 3 QUIET)
-if(PYTHONLIBS_FOUND)
-    set(Python_version 3)
-endif()
 ExternalProject_Add(vtk
     PREFIX ${VTK_PATH}
     URL https://www.vtk.org/files/release/9.0/VTK-9.0.0.tar.gz
@@ -48,7 +50,7 @@ ExternalProject_Add(vtk
         -DCMAKE_C_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DCMAKE_CXX_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DVTK_WRAP_PYTHON:BOOL=ON
-        -DVTK_PYTHON_VERSION:STRING=${Python_version}
+        -DVTK_PYTHON_VERSION:STRING=${VTK_PYTHON_VERSION}
         -DVTK_GROUP_ENABLE_Web:STRING=YES
         -DVTK_BUILD_TESTING:BOOL=OFF
         -DVTK_LEGACY_REMOVE:BOOL=ON
