@@ -31,7 +31,7 @@ if(PYTHON_VERSION MATCHES "^3")
     if(DEFINED ENV{Python3_ROOT_DIR})
         message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
         set(EXTRA_VTK_OPTIONS 
-            -DPython3_FIND_STRATEGYR:STRING="LOCATION"
+            -DPython3_FIND_STRATEGY:STRING=LOCATION
             -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
         )
     endif()
@@ -41,7 +41,7 @@ else()
     if(DEFINED ENV{Python3_ROOT_DIR})
         message(STATUS "Using Python_ROOT_DIR = $ENV{Python2_ROOT_DIR}")
         set(EXTRA_VTK_OPTIONS 
-            -DPython2_FIND_STRATEGYR:STRING="LOCATION"
+            -DPython2_FIND_STRATEGY:STRING=LOCATION
             -DPython2_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
         )
     endif()
