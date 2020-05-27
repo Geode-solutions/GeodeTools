@@ -26,16 +26,24 @@ project(GeodeTools CXX)
 
 set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 if(PYTHON_VERSION MATCHES "^3")
+    message(STATUS "Using Python 3")
     set(VTK_PYTHON_VERSION "3")
     if(DEFINED ENV{Python3_ROOT_DIR})
         message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
-        set(EXTRA_VTK_OPTIONS "-DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}")
+        set(EXTRA_VTK_OPTIONS 
+            -DPython3_FIND_STRATEGYR:STRING="LOCATION"
+            -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
+        )
     endif()
 else()
+    message(STATUS "Using Python 2")
     set(VTK_PYTHON_VERSION "2")
     if(DEFINED ENV{Python3_ROOT_DIR})
         message(STATUS "Using Python_ROOT_DIR = $ENV{Python2_ROOT_DIR}")
-        set(EXTRA_VTK_OPTIONS "-DPython2_ROOT_DIR:PATH=$ENV{Python2_ROOT_DIR}")
+        set(EXTRA_VTK_OPTIONS 
+            -DPython2_FIND_STRATEGYR:STRING="LOCATION"
+            -DPython2_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
+        )
     endif()
 endif()
 
