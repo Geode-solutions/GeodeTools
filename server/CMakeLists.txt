@@ -55,7 +55,7 @@ string(REPLACE "/MDd" "/MD" NEW_FLAGS ${CMAKE_CXX_FLAGS_DEBUG})
 ExternalProject_Add(vtk
     PREFIX ${VTK_PATH}
     URL https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
-    URL_MD5 fa61cd36491d89a17edab18522bdda49
+    URL_MD5 b3ba14d616c3b23583c42cffb585deac
     CMAKE_GENERATOR ${CMAKE_GENERATOR}
     CMAKE_GENERATOR_PLATFORM ${CMAKE_GENERATOR_PLATFORM}
     CMAKE_ARGS
