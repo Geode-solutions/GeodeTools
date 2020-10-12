@@ -25,27 +25,25 @@ cmake_minimum_required(VERSION 3.11)
 project(GeodeTools CXX)
 
 set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
-if(PYTHON_VERSION MATCHES "^3")
-    message(STATUS "Using Python 3")
-    set(VTK_PYTHON_VERSION "3")
-    if(DEFINED ENV{Python3_ROOT_DIR})
-        message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
-        set(EXTRA_VTK_OPTIONS 
-            -DPython3_FIND_STRATEGY:STRING=LOCATION
-            -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
-        )
-    endif()
+message(STATUS "Using Python 3")
+set(VTK_PYTHON_VERSION "3")
+if(DEFINED ENV{Python3_ROOT_DIR})
+    message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
+    set(EXTRA_VTK_OPTIONS 
+        -DPython3_FIND_STRATEGY:STRING=LOCATION
+        -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
+    )
 else()
-    message(STATUS "Using Python 2")
-    set(VTK_PYTHON_VERSION "2")
-    if(DEFINED ENV{Python3_ROOT_DIR})
-        message(STATUS "Using Python_ROOT_DIR = $ENV{Python2_ROOT_DIR}")
-        set(EXTRA_VTK_OPTIONS 
-            -DPython2_FIND_STRATEGY:STRING=LOCATION
-            -DPython2_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
-        )
+    if(PYTHON_EXECUTABLE)
+        message(STATUS "Using PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
+        set(EXTRA_VTK_OPTIONS -DPYTHON_EXECUTABLE:STRING=${PYTHON_EXECUTABLE})
+    endif()
+    if(PYTHON_LIBRARY)
+        message(STATUS "Using PYTHON_LIBRARY = ${PYTHON_LIBRARY}")
+        set(EXTRA_VTK_OPTIONS -DPYTHON_LIBRARY:STRING=${PYTHON_LIBRARY} ${EXTRA_VTK_OPTIONS})
     endif()
 endif()
+
 
 include(ExternalProject)
 
