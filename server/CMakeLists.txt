@@ -29,21 +29,20 @@ message(STATUS "Using Python 3")
 set(VTK_PYTHON_VERSION "3")
 if(DEFINED ENV{Python3_ROOT_DIR})
     message(STATUS "Using Python3_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
-    set(EXTRA_VTK_OPTIONS 
-        -DPython3_FIND_STRATEGY:STRING=LOCATION
+    set(PYTHON_ROOT 
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
     )
 endif()
 
 if(DEFINED ENV{Python3_EXECUTABLE})
     message(STATUS "Using Python3_EXECUTABLE = $ENV{Python3_EXECUTABLE}")
-    set(EXTRA_VTK_OPTION2 
-        -DPython3_EXECUTABLE:PATH=$ENV{Python3_EXECUTABLE}
+    set(PYTHON_EXE 
+        -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}
     )
 endif()
 
-message(STATUS "EXTRA_VTK_OPTIONS = ${EXTRA_VTK_OPTIONS}")
-message(STATUS "EXTRA_VTK_OPTIONS2 = ${EXTRA_VTK_OPTIONS2}")
+message(STATUS "PYTHON_ROOT = ${PYTHON_ROOT}")
+message(STATUS "PYTHON_EXE = ${PYTHON_EXE}")
 
 include(ExternalProject)
 
@@ -71,6 +70,7 @@ ExternalProject_Add(vtk
         -DVTK_BUILD_TESTING:BOOL=OFF
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
-        ${EXTRA_VTK_OPTIONS}
-        ${EXTRA_VTK_OPTIONS2}
+        -DPython3_FIND_STRATEGY:STRING=LOCATION
+        ${PYTHON_ROOT}
+        ${PYTHON_EXE}
 )
