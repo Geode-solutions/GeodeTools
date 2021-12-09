@@ -41,8 +41,16 @@ if(DEFINED ENV{Python3_EXECUTABLE})
     )
 endif()
 
+if(DEFINED ENV{Python3_INCLUDE_DIRS})
+    message(STATUS "Using Python3_INCLUDE_DIRS = $ENV{Python3_INCLUDE_DIRS}")
+    set(PYTHON_INCLUDE 
+        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
+    )
+endif()
+
 message(STATUS "PYTHON_ROOT = ${PYTHON_ROOT}")
 message(STATUS "PYTHON_EXE = ${PYTHON_EXE}")
+message(STATUS "PYTHON_INCLUDE = ${PYTHON_INCLUDE}")
 
 include(ExternalProject)
 
@@ -72,4 +80,5 @@ ExternalProject_Add(vtk
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
         -DPython3_FIND_STRATEGY:STRING=LOCATION
         ${PYTHON_EXE}
+        ${PYTHON_INCLUDE}
 )
