@@ -32,6 +32,7 @@ if(DEFINED ENV{Python3_ROOT_DIR})
     set(EXTRA_VTK_OPTIONS 
         -DPython3_FIND_STRATEGY:STRING=LOCATION
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
+        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_ROOT_DIR}/include
     )
 else()
     if(PYTHON_EXECUTABLE)
