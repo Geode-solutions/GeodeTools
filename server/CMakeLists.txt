@@ -30,17 +30,19 @@ set(VTK_PYTHON_VERSION "3")
 if(DEFINED ENV{Python3_ROOT_DIR})
     message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
     set(EXTRA_VTK_OPTIONS 
-        -DPython3_FIND_STRATEGY:STRING=LOCATION
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
     )
 endif()
 
 if(DEFINED ENV{Python3_INCLUDE_DIRS})
+    message(STATUS "Using Python_INCLUDE_DIRS = $ENV{Python3_INCLUDE_DIRS}")
     set(EXTRA_VTK_OPTIONS 
         ${EXTRA_VTK_OPTIONS}
         -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
     )
 endif()
+
+message(STATUS "EXTRA_VTK_OPTIONS = ${EXTRA_VTK_OPTIONS}")
 
 include(ExternalProject)
 
