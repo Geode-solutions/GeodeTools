@@ -37,8 +37,7 @@ endif()
 
 if(DEFINED ENV{Python3_INCLUDE_DIRS})
     message(STATUS "Using Python_INCLUDE_DIRS = $ENV{Python3_INCLUDE_DIRS}")
-    set(EXTRA_VTK_OPTIONS 
-        ${EXTRA_VTK_OPTIONS}
+    set(EXTRA_VTK_OPTION2 
         -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
     )
 endif()
@@ -71,4 +70,5 @@ ExternalProject_Add(vtk
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
         ${EXTRA_VTK_OPTIONS}
+        ${EXTRA_VTK_OPTIONS2}
 )
