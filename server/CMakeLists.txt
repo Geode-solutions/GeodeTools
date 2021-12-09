@@ -71,6 +71,5 @@ ExternalProject_Add(vtk
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
         -DPython3_FIND_STRATEGY:STRING=LOCATION
-        ${PYTHON_ROOT}
         ${PYTHON_EXE}
 )
