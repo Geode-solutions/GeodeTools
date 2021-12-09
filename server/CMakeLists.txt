@@ -28,21 +28,22 @@ set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 message(STATUS "Using Python 3")
 set(VTK_PYTHON_VERSION "3")
 if(DEFINED ENV{Python3_ROOT_DIR})
-    message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
+    message(STATUS "Using Python3_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
     set(EXTRA_VTK_OPTIONS 
         -DPython3_FIND_STRATEGY:STRING=LOCATION
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
     )
 endif()
 
-if(DEFINED ENV{Python3_INCLUDE_DIRS})
-    message(STATUS "Using Python_INCLUDE_DIRS = $ENV{Python3_INCLUDE_DIRS}")
+if(DEFINED ENV{Python3_EXECUTABLE})
+    message(STATUS "Using Python3_EXECUTABLE = $ENV{Python3_EXECUTABLE}")
     set(EXTRA_VTK_OPTION2 
-        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
+        -DPython3_EXECUTABLE:PATH=$ENV{Python3_EXECUTABLE}
     )
 endif()
 
 message(STATUS "EXTRA_VTK_OPTIONS = ${EXTRA_VTK_OPTIONS}")
+message(STATUS "EXTRA_VTK_OPTIONS2 = ${EXTRA_VTK_OPTIONS2}")
 
 include(ExternalProject)
 
@@ -59,6 +60,7 @@ ExternalProject_Add(vtk
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
         -DCMAKE_INSTALL_MESSAGE=LAZY
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_PREFIX_PATH=$ENV{Python3_ROOT_DIR}
     CMAKE_CACHE_ARGS
         -DCMAKE_C_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DCMAKE_CXX_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
