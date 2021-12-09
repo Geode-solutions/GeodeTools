@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.18)
 
 #-------------------------------------------------------------------------------
 # Project options
@@ -30,6 +30,7 @@ set(VTK_PYTHON_VERSION "3")
 if(DEFINED ENV{Python3_ROOT_DIR})
     message(STATUS "Using Python_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
     set(EXTRA_VTK_OPTIONS 
+        -DPython3_FIND_STRATEGY:STRING=LOCATION
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
     )
 endif()
@@ -63,6 +64,7 @@ ExternalProject_Add(vtk
         -DCMAKE_C_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DCMAKE_CXX_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DVTK_WRAP_PYTHON:BOOL=ON
+        -DPYTHON_VERSION:STRING=${PYTHON_VERSION}
         -DVTK_PYTHON_VERSION:STRING=${VTK_PYTHON_VERSION}
         -DVTK_GROUP_ENABLE_Web:STRING=YES
         -DVTK_BUILD_TESTING:BOOL=OFF
