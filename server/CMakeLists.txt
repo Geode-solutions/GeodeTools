@@ -32,23 +32,15 @@ if(DEFINED ENV{Python3_ROOT_DIR})
     set(EXTRA_VTK_OPTIONS 
         -DPython3_FIND_STRATEGY:STRING=LOCATION
         -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
-        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_ROOT_DIR}/include
     )
-else()
-    if(PYTHON_EXECUTABLE)
-        message(STATUS "Using PYTHON_EXECUTABLE = ${PYTHON_EXECUTABLE}")
-        set(EXTRA_VTK_OPTIONS -DPython3_EXECUTABLE:STRING=${PYTHON_EXECUTABLE})
-    endif()
-    if(PYTHON_LIBRARY)
-        message(STATUS "Using PYTHON_LIBRARY = ${PYTHON_LIBRARY}")
-        set(EXTRA_VTK_OPTIONS -DPython3_LIBRARY:STRING=${PYTHON_LIBRARY} ${EXTRA_VTK_OPTIONS})
-    endif()
-    if(PYTHON_INCLUDE_DIR)
-        message(STATUS "Using PYTHON_INCLUDE_DIR = ${PYTHON_INCLUDE_DIR}")
-        set(EXTRA_VTK_OPTIONS -DPython3_INCLUDE_DIR:STRING=${PYTHON_INCLUDE_DIR} ${EXTRA_VTK_OPTIONS})
-    endif()
 endif()
 
+if(DEFINED ENV{Python3_INCLUDE_DIRS})
+    set(EXTRA_VTK_OPTIONS 
+        ${EXTRA_VTK_OPTIONS}
+        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
+    )
+endif()
 
 include(ExternalProject)
 
