@@ -41,10 +41,10 @@ if(DEFINED ENV{Python3_EXECUTABLE})
     )
 endif()
 
-if(DEFINED ENV{Python3_INCLUDE_DIRS})
-    message(STATUS "Using Python3_INCLUDE_DIRS = $ENV{Python3_INCLUDE_DIRS}")
+if(DEFINED ENV{Python3_INCLUDE_DIR})
+    message(STATUS "Using Python3_INCLUDE_DIR = $ENV{Python3_INCLUDE_DIR}")
     set(PYTHON_INCLUDE 
-        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
+        -DPython3_INCLUDE_DIR:PATH=$ENV{Python3_INCLUDE_DIR}
     )
 endif()
 
@@ -78,6 +78,6 @@ ExternalProject_Add(vtk
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
         -DPython3_FIND_STRATEGY:STRING=LOCATION
-        -DPython3_INCLUDE_DIRS:PATH=$ENV{Python3_INCLUDE_DIRS}
+        -DPython3_INCLUDE_DIR:PATH=$ENV{Python3_INCLUDE_DIR}
         -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}
 )
