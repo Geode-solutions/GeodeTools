@@ -34,6 +34,7 @@ if(DEFINED $ENV{PYTHON_PREFIX})
     )
 endif()
 
+message(STATUS "PYTHON_PREFIX = $ENV{PYTHON_PREFIX}")
 message(STATUS "PYTHON_EXE = ${PYTHON_EXE}")
 
 include(ExternalProject)
