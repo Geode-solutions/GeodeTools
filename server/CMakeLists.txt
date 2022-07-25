@@ -27,30 +27,14 @@ project(GeodeTools CXX)
 set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 message(STATUS "Using Python 3")
 set(VTK_PYTHON_VERSION "3")
-if(DEFINED ENV{Python3_ROOT_DIR})
-    message(STATUS "Using Python3_ROOT_DIR = $ENV{Python3_ROOT_DIR}")
-    set(PYTHON_ROOT 
-        -DPython3_ROOT_DIR:PATH=$ENV{Python3_ROOT_DIR}
-    )
-endif()
-
-if(DEFINED ENV{Python3_EXECUTABLE})
-    message(STATUS "Using Python3_EXECUTABLE = $ENV{Python3_EXECUTABLE}")
+if(DEFINED ENV{PYTHON_PREFIX})
+    message(STATUS "Using PYTHON_PREFIX = $ENV{PYTHON_PREFIX}")
     set(PYTHON_EXE 
-        -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}
+        -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}/bin/python
     )
 endif()
 
-if(DEFINED ENV{Python3_INCLUDE_DIR})
-    message(STATUS "Using Python3_INCLUDE_DIR = $ENV{Python3_INCLUDE_DIR}")
-    set(PYTHON_INCLUDE 
-        -DPython3_INCLUDE_DIR:PATH=$ENV{Python3_INCLUDE_DIR}
-    )
-endif()
-
-message(STATUS "PYTHON_ROOT = ${PYTHON_ROOT}")
 message(STATUS "PYTHON_EXE = ${PYTHON_EXE}")
-message(STATUS "PYTHON_INCLUDE = ${PYTHON_INCLUDE}")
 
 include(ExternalProject)
 
@@ -59,14 +43,15 @@ set(VTK_INSTALL_PREFIX ${VTK_PATH}/install)
 string(REPLACE "/MDd" "/MD" NEW_FLAGS ${CMAKE_CXX_FLAGS_DEBUG})
 ExternalProject_Add(vtk
     PREFIX ${VTK_PATH}
-    URL https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
-    URL_MD5 b3ba14d616c3b23583c42cffb585deac
+    URL https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz
+    URL_HASH SHA256=8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96
     CMAKE_GENERATOR ${CMAKE_GENERATOR}
     CMAKE_GENERATOR_PLATFORM ${CMAKE_GENERATOR_PLATFORM}
     CMAKE_ARGS
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
         -DCMAKE_INSTALL_MESSAGE=LAZY
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_PREFIX_PATH=$ENV{PYTHON_PREFIX}
     CMAKE_CACHE_ARGS
         -DCMAKE_C_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
         -DCMAKE_CXX_FLAGS_DEBUG:INTERNAL=${NEW_FLAGS}
@@ -78,6 +63,5 @@ ExternalProject_Add(vtk
         -DVTK_LEGACY_REMOVE:BOOL=ON
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
         -DPython3_FIND_STRATEGY:STRING=LOCATION
-        -DPython3_INCLUDE_DIR:PATH=$ENV{Python3_INCLUDE_DIR}
-        -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}
+        ${PYTHON_EXE}
 )
