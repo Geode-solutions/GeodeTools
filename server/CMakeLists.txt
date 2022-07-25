@@ -27,7 +27,7 @@ project(GeodeTools CXX)
 set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 message(STATUS "Using Python 3")
 set(VTK_PYTHON_VERSION "3")
-if(DEFINED ENV{PYTHON_PREFIX})
+if(DEFINED $ENV{PYTHON_PREFIX})
     message(STATUS "Using PYTHON_PREFIX = $ENV{PYTHON_PREFIX}")
     set(PYTHON_EXE 
         -DPython3_EXECUTABLE:FILEPATH=$ENV{Python3_EXECUTABLE}/bin/python
