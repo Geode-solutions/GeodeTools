@@ -35,8 +35,8 @@ set(VTK_PATH ${PROJECT_BINARY_DIR}/vtk)
 set(VTK_INSTALL_PREFIX ${VTK_PATH}/install)
 ExternalProject_Add(vtk
     PREFIX ${VTK_PATH}
-    URL https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz
-    URL_HASH SHA256=8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96
+    URL https://www.vtk.org/files/release/9.2/VTK-9.2.0.rc1.tar.gz
+    URL_HASH SHA256=3d219ae624d0ce6d72bb9bdbf5895d0eaa875ff3115a61d3c300b257ea7c0f7e
     CMAKE_GENERATOR ${CMAKE_GENERATOR}
     CMAKE_GENERATOR_PLATFORM ${CMAKE_GENERATOR_PLATFORM}
     CMAKE_ARGS
