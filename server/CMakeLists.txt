@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.13)
 
 #-------------------------------------------------------------------------------
 # Project options
@@ -42,13 +42,12 @@ ExternalProject_Add(vtk
     CMAKE_ARGS
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
         -DCMAKE_INSTALL_MESSAGE=LAZY
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
         -DCMAKE_BUILD_TYPE=Release
         -DCMAKE_INSTALL_PREFIX:PATH=${VTK_INSTALL_PREFIX}
     CMAKE_CACHE_ARGS
+        -DVTK_INSTALL_SDK:BOOL=ON
         -DVTK_WRAP_PYTHON:BOOL=ON
         -DVTK_PYTHON_VERSION:STRING=3
-        -DVTK_WHEEL_BUILD:BOOL=ON
         -DVTK_GROUP_ENABLE_Web:STRING=YES
         -DVTK_BUILD_TESTING:BOOL=OFF
         -DVTK_LEGACY_REMOVE:BOOL=ON
