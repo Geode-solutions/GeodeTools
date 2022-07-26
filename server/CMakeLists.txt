@@ -1,4 +1,4 @@
-# Copyright (c) 2019 - 2021 Geode-solutions
+# Copyright (c) 2019 - 2022 Geode-solutions
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -28,15 +28,13 @@ set(PYTHON_VERSION 3 CACHE STRING "Python version to use")
 set(VTK_PYTHON_VERSION "3")
 
 message(STATUS "PYTHON_PREFIX = $ENV{PYTHON_PREFIX}")
-message(STATUS "PYTHON_EXE = $ENV{PYTHON_EXE}")
-message(STATUS "PYTHON_INCLUDE = $ENV{PYTHON_INCLUDE}")
 
 include(ExternalProject)
 
 set(VTK_PATH ${PROJECT_BINARY_DIR}/vtk)
 set(VTK_INSTALL_PREFIX ${VTK_PATH}/install)
 ExternalProject_Add(vtk
-    PREFIX ${PROJECT_BINARY_DIR}/vtk
+    PREFIX ${VTK_PATH}
     URL https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz
     URL_HASH SHA256=8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96
     CMAKE_GENERATOR ${CMAKE_GENERATOR}

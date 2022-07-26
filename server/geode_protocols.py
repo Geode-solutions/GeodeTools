@@ -1,4 +1,4 @@
-# Copyright (c) 2019 - 2021 Geode-solutions
+# Copyright (c) 2019 - 2022 Geode-solutions
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,7 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os 
+import os
 
 from vtk.web.protocols import vtkWebProtocol
 import vtk
@@ -26,6 +26,7 @@ import vtk
 from wslink import register as exportRpc
 
 from uuid import uuid4 as uuid
+
 
 class GeodeProtocol(vtkWebProtocol):
     def getDataBase(self):
@@ -36,14 +37,15 @@ class GeodeProtocol(vtkWebProtocol):
 
     def getObject(self, id):
         return self.getDataBase()[id]
-    
+
     def getProtocol(self, name):
         for p in self.coreServer.getLinkProtocols():
             if(type(p).__name__ == name):
                 return p
 
-    def render(self, view = -1):
-        self.getProtocol("vtkWebPublishImageDelivery").imagePush({"view": view})
+    def render(self, view=-1):
+        self.getProtocol("vtkWebPublishImageDelivery").imagePush(
+            {"view": view})
 
     def registerObjectFromFile(self, type, filename, cpp, vtk_object, vtk_light):
         print(filename)
@@ -54,14 +56,14 @@ class GeodeProtocol(vtkWebProtocol):
         bounds = actor.GetBounds()
         bbox = vtk.vtkBoundingBox(bounds)
         return bbox
-    
+
     def addVTKObject(self, vtk_object):
         mapper = vtk.vtkPolyDataMapper()
         actor = vtk.vtkActor()
         mapper.SetInputData(vtk_object)
         mapper.SetColorModeToMapScalars()
-        mapper.SetResolveCoincidentTopologyLineOffsetParameters(1,-0.1)
-        mapper.SetResolveCoincidentTopologyPolygonOffsetParameters(2,0)
+        mapper.SetResolveCoincidentTopologyLineOffsetParameters(1, -0.1)
+        mapper.SetResolveCoincidentTopologyPolygonOffsetParameters(2, 0)
         mapper.SetResolveCoincidentTopologyPointOffsetParameter(-2)
         actor.SetMapper(mapper)
         self.getRenderer().AddActor(actor)
@@ -87,13 +89,12 @@ class GeodeProtocol(vtkWebProtocol):
         id = str(uuid())
         print(id)
         self.getDataBase()[id] = {
-            "type": object_type, 
-            "name": name, 
-            "cpp": cpp, 
+            "type": object_type,
+            "name": name,
+            "cpp": cpp,
             "bbox": bbox,
-            "vtk": vtk_object, 
+            "vtk": vtk_object,
             "actor": actor,
             "mapper": mapper
         }
         return {"id": id, "name": name, "type": object_type, "data": vtk_light}
-
