@@ -40,7 +40,7 @@ class GeodeProtocol(vtkWebProtocol):
 
     def getProtocol(self, name):
         for p in self.coreServer.getLinkProtocols():
-            if(type(p).__name__ == name):
+            if (type(p).__name__ == name):
                 return p
 
     def render(self, view=-1):
@@ -77,6 +77,8 @@ class GeodeProtocol(vtkWebProtocol):
             for key, components in vtk_object.items():
                 mapper[key] = {}
                 actor[key] = {}
+                if key == "blocks":
+                    continue
                 for id, polydata in components.items():
                     object_mapper, object_actor = self.addVTKObject(polydata)
                     if polydata.GetNumberOfPoints() != 0:
